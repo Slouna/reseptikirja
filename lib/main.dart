@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:reseptikirja/widgets/bottom_navi_bar.dart';
 import 'package:reseptikirja/widgets/recipe_card.dart';
 import 'package:reseptikirja/widgets/recipe_list_view.dart';
 
@@ -16,7 +17,9 @@ class MainApp extends StatelessWidget {
         body: Center(
           child: RecipeListView(),
         ),
+        bottomNavigationBar: BottomNaviBar( 
+              onDestinationSelected: null
       ),
-    );
+    ));
   }
 }
