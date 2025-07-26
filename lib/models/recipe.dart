@@ -1,12 +1,12 @@
 class Recipe {
-  final String name;
-  final String description;
-  final String ingridients;
-  final String steps;
+  final String? name;
+  final String? description;
+  final String? ingridients;
+  final String? steps;
 
-  final bool vegan;
-  final bool vegetarian;
-  final bool glutenFree;
+  final bool? vegan;
+  final bool? vegetarian;
+  final bool? glutenFree;
 
   Recipe(
     this.name,

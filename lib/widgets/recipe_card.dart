@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 
 class RecipeCard extends StatelessWidget {
-  const RecipeCard({super.key});
+  const RecipeCard({super.key, required this.name, required this.description});
+  final String name;
+  final String description;
+
+  String getName(){
+    return name;
+  }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -9,10 +16,10 @@ class RecipeCard extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          const ListTile(
+           ListTile(
             leading: Icon(Icons.local_pizza_outlined),
-            title: Text("Name of recipe"),
-            subtitle: Text("short description"),
+            title: Text(name),
+            subtitle: Text(description),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
@@ -20,7 +27,7 @@ class RecipeCard extends StatelessWidget {
               TextButton(onPressed: null, child: Text("Read more")),
               IconButton(onPressed: null, icon: Icon(Icons.favorite_border)),
             ],
-          )
+          ),
         ],
       ),
     );

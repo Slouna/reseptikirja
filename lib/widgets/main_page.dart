@@ -8,6 +8,10 @@ import '../destinations.dart';
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
 
+  void setSelectedIndex(int index) {
+    _MainPageState()._selectedIndex = index;
+  }
+
   @override
   State<MainPage> createState() => _MainPageState();
 }
@@ -21,20 +25,15 @@ class _MainPageState extends State<MainPage> {
 
   int _selectedIndex = 0;
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
+  
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       appBar: AppBar(
         title: Text("Recipes"),
-        backgroundColor:(const Color.fromARGB(255, 239, 237, 237)),
-        ),
+        backgroundColor: (const Color.fromARGB(255, 239, 237, 237)),
+      ),
       body: pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         elevation: 0,

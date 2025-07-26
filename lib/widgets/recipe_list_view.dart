@@ -1,16 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:reseptikirja/controllers/recipe_controller.dart';
 import 'package:reseptikirja/widgets/recipe_card.dart';
+import 'package:get/get.dart';
 
 class RecipeListView extends StatelessWidget {
-  const RecipeListView({super.key, this.userID});
+  RecipeListView({super.key, this.userID});
+  final recipeController = Get.find<RecipeController>();
 
   final userID;
   @override
   Widget build(BuildContext context) {
-    return userID == 0
-        ? Center(
-            child: ListView(children: [RecipeCard(), RecipeCard(), RecipeCard()]),
-          )
-        : Center(child: ListView(children: [RecipeCard()]));
+    return Obx(
+      () => recipeController.size == 0
+          ? Center(child: Text('No Recipes Yet'))
+          : ListView(
+              children: recipeController.recipes
+                  .map(
+                    (recipe) => RecipeCard(
+                      name: recipe.name,
+                      description: recipe.description,
+                    ),
+                  )
+                  .toList(),
+            ),
+    );
+
   }
 }
