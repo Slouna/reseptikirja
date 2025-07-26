@@ -9,8 +9,8 @@ class RecipeListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return userID == 0
         ? Center(
-            child: Column(children: [RecipeCard(), RecipeCard(), RecipeCard()]),
+            child: ListView(children: [RecipeCard(), RecipeCard(), RecipeCard()]),
           )
-        : Center(child: Column(children: [RecipeCard()]));
+        : Center(child: ListView(children: [RecipeCard()]));
   }
 }

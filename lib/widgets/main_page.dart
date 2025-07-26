@@ -29,8 +29,12 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
+    
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Recipes"),
+        backgroundColor:(const Color.fromARGB(255, 239, 237, 237)),
+        ),
       body: pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         elevation: 0,
