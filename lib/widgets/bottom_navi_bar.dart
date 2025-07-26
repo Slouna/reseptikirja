@@ -1,28 +1,55 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:reseptikirja/main.dart';
+import 'package:reseptikirja/widgets/favourites_screen.dart';
+import 'package:reseptikirja/widgets/new_recipe_screen.dart';
 import '../destinations.dart';
 
-class BottomNaviBar extends StatelessWidget {
-  const BottomNaviBar({
-    super.key,
-    this.onDestinationSelected,
-  });
+class MainPage extends StatefulWidget {
+  const MainPage({super.key});
 
-  final int selectedIndex = 0;
-  final ValueChanged<int>? onDestinationSelected;
+  @override
+  State<MainPage> createState() => _MainPageState();
+}
+
+class _MainPageState extends State<MainPage> {
+  final List<Widget> pages = [
+    HomeScreen(),
+    FavouritesScreen(),
+    NewRecipeScreen(),
+  ];
+
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return NavigationBar(
-      elevation:0,
-      backgroundColor: Colors.white,
-      destinations: destinations.map<NavigationDestination>((d) {
-        return NavigationDestination(icon: Icon(d.icon), label: d.label);
-        }).toList(),
-      selectedIndex: selectedIndex,
-      onDestinationSelected: onDestinationSelected,
-
-
-);
+    return Scaffold(
+      body: pages[_selectedIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        elevation: 0,
+        backgroundColor: Colors.white,
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite),
+            label: 'Favourites',
+          ),
+          BottomNavigationBarItem(icon: Icon(Icons.add), label: 'Add New'),
+        ],
+        currentIndex: _selectedIndex,
+        onTap: (index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
+      ),
+    );
   }
 }

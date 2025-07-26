@@ -1,25 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:reseptikirja/widgets/bottom_navi_bar.dart';
+import 'package:reseptikirja/widgets/favourites_screen.dart';
 import 'package:reseptikirja/widgets/recipe_card.dart';
 import 'package:reseptikirja/widgets/recipe_list_view.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(MaterialApp(home: MainPage()));
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: RecipeListView(),
-        ),
-        bottomNavigationBar: BottomNaviBar( 
-              onDestinationSelected: null
-      ),
-    ));
+    return  Column(children: [const RecipeListView(userID: 0),
+        
+        ]
+    );
   }
 }

@@ -18,7 +18,7 @@ class RecipeCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
               TextButton(onPressed: null, child: Text("Read more")),
-              IconButton(onPressed: null, icon: Icon(Icons.favorite)),
+              IconButton(onPressed: null, icon: Icon(Icons.favorite_border)),
             ],
           )
         ],
