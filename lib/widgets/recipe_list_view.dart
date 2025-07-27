@@ -16,9 +16,7 @@ class RecipeListView extends StatelessWidget {
           : ListView(
               children: recipeController.recipes
                   .map(
-                    (recipe) => RecipeCard(
-                      name: recipe.name,
-                      description: recipe.description,
+                    (recipe) => RecipeCard(recipe: recipe,
                     ),
                   )
                   .toList(),

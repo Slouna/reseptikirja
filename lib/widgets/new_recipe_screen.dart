@@ -25,7 +25,7 @@ class NewRecipeScreen extends StatelessWidget {
 
       recipeController.add(recipe);
       _formKey.currentState?.reset();
-      MainPage().setSelectedIndex(0);
+
     }
   }
 
@@ -76,7 +76,7 @@ class NewRecipeScreen extends StatelessWidget {
             Container(
               padding: EdgeInsets.all(5),
               child: FormBuilderTextField(
-                name: "ingredients",
+                name: "ingridients",
                 keyboardType: TextInputType.multiline,
                 maxLines: null,
                 minLines: 4,

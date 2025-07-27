@@ -3,13 +3,16 @@ import 'package:get/get.dart';
 import 'package:reseptikirja/main.dart';
 import 'package:reseptikirja/widgets/favourites_screen.dart';
 import 'package:reseptikirja/widgets/new_recipe_screen.dart';
+import 'package:reseptikirja/widgets/recipe_screen.dart';
 import '../destinations.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
 
-  void setSelectedIndex(int index) {
-    _MainPageState()._selectedIndex = index;
+  void setSelectedIndex(int n) {
+    print(1);
+
+    _MainPageState().callBack(n);
   }
 
   @override
@@ -21,11 +24,16 @@ class _MainPageState extends State<MainPage> {
     HomeScreen(),
     FavouritesScreen(),
     NewRecipeScreen(),
+    RecipeScreen(),
   ];
 
   int _selectedIndex = 0;
 
-  
+  callBack(int n) {
+    setState(() {
+      _selectedIndex = n;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
