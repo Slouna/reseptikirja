@@ -4,7 +4,7 @@ import 'package:reseptikirja/main.dart';
 import 'package:reseptikirja/widgets/favourites_screen.dart';
 import 'package:reseptikirja/widgets/new_recipe_screen.dart';
 import 'package:reseptikirja/widgets/recipe_screen.dart';
-import '../destinations.dart';
+
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -43,6 +43,7 @@ class _MainPageState extends State<MainPage> {
         backgroundColor: (const Color.fromARGB(255, 239, 237, 237)),
       ),
       body: pages[_selectedIndex],
+      
       bottomNavigationBar: BottomNavigationBar(
         elevation: 0,
         backgroundColor: Colors.white,

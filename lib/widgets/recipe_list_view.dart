@@ -15,13 +15,9 @@ class RecipeListView extends StatelessWidget {
           ? Center(child: Text('No Recipes Yet'))
           : ListView(
               children: recipeController.recipes
-                  .map(
-                    (recipe) => RecipeCard(recipe: recipe,
-                    ),
-                  )
+                  .map((recipe) => RecipeCard(recipe: recipe))
                   .toList(),
             ),
     );
-
   }
 }

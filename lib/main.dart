@@ -12,7 +12,8 @@ Future<void> main() async {
   await Hive.initFlutter();
   await Hive.openBox("storage");
   Get.lazyPut<RecipeController>(() => RecipeController());
-  runApp(GetMaterialApp(home: MainPage(), getPages: [
+  runApp(GetMaterialApp(initialRoute: "/", getPages: [
+    GetPage(name: "/", page: () => MainPage()),
     GetPage(name: "/recipe/:recipeName", page: () => RecipeScreen())
   ], ));
 }

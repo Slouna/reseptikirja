@@ -32,7 +32,9 @@ class RecipeCard extends StatelessWidget {
           ),
           Container(padding: EdgeInsets.all(5), child: Text(recipe.steps!)),
 
-          IconButton(onPressed: null, icon: Icon(Icons.favorite_border, color: Colors.red[300],))
+          Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [IconButton(onPressed: null, icon: Icon(Icons.favorite_border, color: Colors.red[300]), tooltip: "Add to favourites",),
+          IconButton(onPressed: () => Get.toNamed("/recipe/${recipe.name}"), icon: Icon(Icons.edit), tooltip: "Edit recipe",),
+          ])
     ],));
   }
 
