@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:reseptikirja/controllers/recipe_controller.dart';
 import 'package:reseptikirja/widgets/recipe_card.dart';
+import 'package:reseptikirja/models/recipe.dart';
 import 'package:get/get.dart';
 
 class RecipeScreen extends StatelessWidget {
-  
   @override
   Widget build(BuildContext context) {
-    var recipeName = Get.parameters["recipeName"];
+    Recipe recipe = Get.arguments;
+
+    //var recipeName = Get.parameters["recipeName"];
     return Scaffold(
       appBar: AppBar(
         title: Text("Recipes"),
@@ -16,37 +18,41 @@ class RecipeScreen extends StatelessWidget {
       ),
       body: Container(
         padding: EdgeInsets.all(5),
-        child: Column(
-          children: [
-            ElevatedButton(onPressed: () => Get.back(), child: Text("Back to main screen")),
-            Container(
+        child: Center( 
+          child: ListView(
+            children: [
+            ElevatedButton(
+              onPressed: () => Get.back(),
+              child: Text("Back to main screen"),
+            ),
+            Center(child: Container(
               padding: EdgeInsets.all(10),
               child: Center(
-                child: Text("Name", style: TextStyle(fontSize: 16)),
+                child: Text(recipe.name!, style: TextStyle(fontSize: 16)),
               ),
-            ),
-            Container(
+            )),
+            Center(child: Container(
               padding: EdgeInsets.all(5),
               child: Text(
                 "Ingridients",
                 style: TextStyle(fontStyle: FontStyle.italic),
               ),
-            ),
-            Container(
+            )),
+            Center(child: Container(
               padding: EdgeInsets.all(5),
-              child: Text("recipe.ingridents"),
-            ),
-            Container(
+              child: Text(recipe.ingridients!),
+            )),
+            Center(child :Container(
               padding: EdgeInsets.all(5),
               child: Text(
                 "Steps",
                 style: TextStyle(fontStyle: FontStyle.italic),
               ),
-            ),
-            Container(padding: EdgeInsets.all(5), child: Text("recipe.steps")),
+            )),
+            Center(child: Container(padding: EdgeInsets.all(5), child: Text(recipe.steps!))),
           ],
         ),
       ),
-    );
+    ));
   }
 }

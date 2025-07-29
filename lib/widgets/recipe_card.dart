@@ -14,7 +14,9 @@ class RecipeCard extends StatelessWidget {
   }
 
   Widget readMore() {
-    return Center(child: Column(children: [
+    return Center(
+      child: Column(
+        children: [
           Container(
             padding: EdgeInsets.all(5),
             child: Text(
@@ -32,19 +34,41 @@ class RecipeCard extends StatelessWidget {
           ),
           Container(padding: EdgeInsets.all(5), child: Text(recipe.steps!)),
 
-          Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [IconButton(onPressed: null, icon: Icon(Icons.favorite_border, color: Colors.red[300]), tooltip: "Add to favourites",),
-          IconButton(onPressed: () => Get.toNamed("/recipe/${recipe.name}"), icon: Icon(Icons.edit), tooltip: "Edit recipe",),
-          ])
-    ],));
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              IconButton(
+                onPressed: null,
+                icon: Icon(Icons.favorite_border, color: Colors.red[300]),
+                tooltip: "Add to favourites",
+              ),
+              IconButton(
+                onPressed: () => Get.toNamed("/recipe/${recipe.name}", arguments: recipe ),
+                icon: Icon(Icons.edit),
+                tooltip: "Edit recipe",
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Card(
       child: ExpandablePanel(
-        header: Container(padding: EdgeInsets.all(5), child: Center(child: Text(recipe.name!, style: TextStyle(fontSize: 16)))),
-        collapsed: Container(padding: EdgeInsets.all(10), child: Text(recipe.description!)),
-        expanded: readMore()
+        header: Container(
+          padding: EdgeInsets.all(5),
+          child: Center(
+            child: Text(recipe.name!, style: TextStyle(fontSize: 16)),
+          ),
+        ),
+        collapsed: Container(
+          padding: EdgeInsets.all(10),
+          child: Text(recipe.description!),
+        ),
+        expanded: readMore(),
       ),
     );
   }
