@@ -4,6 +4,18 @@ import 'package:reseptikirja/main.dart';
 import 'package:reseptikirja/widgets/favourites_screen.dart';
 import 'package:reseptikirja/widgets/new_recipe_screen.dart';
 import 'package:reseptikirja/widgets/recipe_screen.dart';
+import 'custom_search_delegate.dart';
+
+/* TODO: add search function
+   TODO: add favourites
+   TODO: change view on different screen sizes
+   TODO: make single recipe cite nicer
+   TODO: notify when recipe is added -> back to main screen?
+   TODO: edit and delete reipes
+   TODO: clean imports
+
+
+*/
 
 
 class MainPage extends StatefulWidget {
@@ -40,6 +52,11 @@ class _MainPageState extends State<MainPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Recipes"),
+        actions: <Widget>[
+          IconButton(onPressed: 
+          () => showSearch(context: context, delegate: CustomSearchDelegate()), 
+          icon: Icon(Icons.search)),
+        ],
         backgroundColor: (const Color.fromARGB(255, 239, 237, 237)),
       ),
       body: pages[_selectedIndex],
