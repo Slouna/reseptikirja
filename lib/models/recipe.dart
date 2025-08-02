@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class Recipe {
   final String? name;
   final String? description;
@@ -30,7 +32,7 @@ class Recipe {
 
   factory Recipe.fromJson(Map json) {
     return Recipe(
-      json['name'], 
+      json['name'],
       json['description'],
       json['ingridients'],
       json['steps'],
@@ -38,5 +40,32 @@ class Recipe {
       json['vegetarian'],
       json['glutenFree'],
     );
+  }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Recipe && runtimeType == other.runtimeType && name == other.name;
+
+  @override
+  int get hashCode => name.hashCode;
+}
+
+class FavoritesProvider with ChangeNotifier {
+  final List<Recipe> _favorites = [];
+
+  List<Recipe> get favorites => _favorites;
+
+  void toggleFavorite(Recipe recipe) {
+    if (_favorites.contains(recipe)) {
+      _favorites.remove(recipe);
+    } else {
+      _favorites.add(recipe);
+    }
+    notifyListeners();
+  }
+
+  bool isFavorite(Recipe recipe) {
+    return _favorites.contains(recipe);
   }
 }

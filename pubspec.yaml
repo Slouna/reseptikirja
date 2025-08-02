@@ -15,6 +15,7 @@ dependencies:
   hive_ce_flutter: ^2.3.1
   delightful_toast: ^1.1.0
   expandable: ^5.0.1
+  provider: ^6.1.5
 
 dev_dependencies:
   flutter_test:

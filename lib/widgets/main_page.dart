@@ -5,6 +5,7 @@ import 'package:reseptikirja/widgets/favourites_screen.dart';
 import 'package:reseptikirja/widgets/new_recipe_screen.dart';
 import 'package:reseptikirja/widgets/recipe_screen.dart';
 import 'custom_search_delegate.dart';
+import 'package:reseptikirja/models/recipe.dart';
 
 /* 
    TODO: add favourites
@@ -17,9 +18,9 @@ import 'custom_search_delegate.dart';
 
 */
 
-
 class MainPage extends StatefulWidget {
-  const MainPage({super.key});
+  const MainPage({super.key, });
+  
 
   void setSelectedIndex(int n) {
     print(1);
@@ -53,14 +54,16 @@ class _MainPageState extends State<MainPage> {
       appBar: AppBar(
         title: Text("Recipes"),
         actions: <Widget>[
-          IconButton(onPressed: 
-          () => showSearch(context: context, delegate: CustomSearchDelegate()), 
-          icon: Icon(Icons.search)),
+          IconButton(
+            onPressed: () =>
+                showSearch(context: context, delegate: CustomSearchDelegate()),
+            icon: Icon(Icons.search),
+          ),
         ],
         backgroundColor: (const Color.fromARGB(255, 239, 237, 237)),
       ),
       body: pages[_selectedIndex],
-      
+
       bottomNavigationBar: BottomNavigationBar(
         elevation: 0,
         backgroundColor: Colors.white,

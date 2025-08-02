@@ -4,15 +4,16 @@ import 'package:get/get.dart';
 import 'package:reseptikirja/widgets/recipe_screen.dart';
 import 'package:reseptikirja/controllers/recipe_controller.dart';
 import 'package:reseptikirja/models/recipe.dart';
+import 'package:provider/provider.dart';
 
 class RecipeCard extends StatelessWidget {
-  const RecipeCard({super.key, required this.recipe});
+  RecipeCard({super.key, required this.recipe});
   final Recipe recipe;
 
   String getName() {
     return recipe.name!;
   }
-
+/*
   Widget readMore() {
     return Center(
       child: Column(
@@ -38,12 +39,19 @@ class RecipeCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               IconButton(
-                onPressed: null,
-                icon: Icon(Icons.favorite_border, color: Colors.red[300]),
-                tooltip: "Add to favourites",
+                icon: Icon(
+                  favoritesProvider.isFavorite(recipe)
+                      ? Icons.favorite
+                      : Icons.favorite_border,
+                ),
+                onPressed: () {
+                  favoritesProvider.toggleFavorite(recipe);
+                  print(favoritesProvider.favorites);
+                },
               ),
               IconButton(
-                onPressed: () => Get.toNamed("/recipe/${recipe.name}", arguments: recipe ),
+                onPressed: () =>
+                    Get.toNamed("/recipe/${recipe.name}", arguments: recipe),
                 icon: Icon(Icons.edit),
                 tooltip: "Edit recipe",
               ),
@@ -53,9 +61,10 @@ class RecipeCard extends StatelessWidget {
       ),
     );
   }
-
+*/
   @override
   Widget build(BuildContext context) {
+    final favoritesProvider = Provider.of<FavoritesProvider>(context);
     return Card(
       child: ExpandablePanel(
         header: Container(
@@ -68,7 +77,34 @@ class RecipeCard extends StatelessWidget {
           padding: EdgeInsets.all(10),
           child: Text(recipe.description!),
         ),
-        expanded: readMore(),
+        expanded: Column(
+          children: [
+            Text("Ingridients", style: const TextStyle(fontStyle: FontStyle.italic)),
+            Text(recipe.ingridients ?? ""),
+            Text("Steps", style: const TextStyle(fontStyle: FontStyle.italic)),
+            Text(recipe.steps ?? ""),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                IconButton(
+                  icon: Icon(
+                    favoritesProvider.isFavorite(recipe)
+                        ? Icons.favorite
+                        : Icons.favorite_border,
+                  ),
+                  onPressed: () {
+                    favoritesProvider.toggleFavorite(recipe);
+                  },
+                ),
+                IconButton(
+                  onPressed: () => Get.toNamed("/recipe/${recipe.name}", arguments: recipe),
+                  icon: const Icon(Icons.edit),
+                  tooltip: "Edit recipe",
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
