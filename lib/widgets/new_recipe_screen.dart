@@ -10,6 +10,9 @@ import 'package:reseptikirja/widgets/main_page.dart';
 class NewRecipeScreen extends StatelessWidget {
   final recipeController = Get.find<RecipeController>();
   static final _formKey = GlobalKey<FormBuilderState>();
+  final void Function(int) onRecipeSaved;
+
+  NewRecipeScreen({super.key, required this.onRecipeSaved});
 
   _submit() {
     if (_formKey.currentState!.saveAndValidate()) {
@@ -25,8 +28,8 @@ class NewRecipeScreen extends StatelessWidget {
 
       recipeController.add(recipe);
       _formKey.currentState?.reset();
-
     }
+    onRecipeSaved(0);
   }
 
   @override

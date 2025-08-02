@@ -8,10 +8,8 @@ import 'custom_search_delegate.dart';
 import 'package:reseptikirja/models/recipe.dart';
 
 /* 
-   TODO: add favourites
    TODO: change view on different screen sizes
    TODO: make single recipe cite nicer
-   TODO: notify when recipe is added -> back to main screen?
    TODO: edit and delete reipes
    TODO: clean imports
 
@@ -19,33 +17,32 @@ import 'package:reseptikirja/models/recipe.dart';
 */
 
 class MainPage extends StatefulWidget {
-  const MainPage({super.key, });
-  
-
-  void setSelectedIndex(int n) {
-    print(1);
-
-    _MainPageState().callBack(n);
-  }
+  const MainPage({super.key});
 
   @override
   State<MainPage> createState() => _MainPageState();
 }
 
 class _MainPageState extends State<MainPage> {
-  final List<Widget> pages = [
-    HomeScreen(),
-    FavouritesScreen(),
-    NewRecipeScreen(),
-    RecipeScreen(),
-  ];
+  late List<Widget> pages;
 
   int _selectedIndex = 0;
 
-  callBack(int n) {
+  void changeScreen(int n) {
     setState(() {
       _selectedIndex = n;
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    pages = [
+      HomeScreen(),
+      FavouritesScreen(),
+      NewRecipeScreen(onRecipeSaved: changeScreen),
+      RecipeScreen(),
+    ];
   }
 
   @override
