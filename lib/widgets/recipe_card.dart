@@ -13,55 +13,7 @@ class RecipeCard extends StatelessWidget {
   String getName() {
     return recipe.name!;
   }
-/*
-  Widget readMore() {
-    return Center(
-      child: Column(
-        children: [
-          Container(
-            padding: EdgeInsets.all(5),
-            child: Text(
-              "Ingridients",
-              style: TextStyle(fontStyle: FontStyle.italic),
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.all(5),
-            child: Text(recipe.ingridients!),
-          ),
-          Container(
-            padding: EdgeInsets.all(5),
-            child: Text("Steps", style: TextStyle(fontStyle: FontStyle.italic)),
-          ),
-          Container(padding: EdgeInsets.all(5), child: Text(recipe.steps!)),
 
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              IconButton(
-                icon: Icon(
-                  favoritesProvider.isFavorite(recipe)
-                      ? Icons.favorite
-                      : Icons.favorite_border,
-                ),
-                onPressed: () {
-                  favoritesProvider.toggleFavorite(recipe);
-                  print(favoritesProvider.favorites);
-                },
-              ),
-              IconButton(
-                onPressed: () =>
-                    Get.toNamed("/recipe/${recipe.name}", arguments: recipe),
-                icon: Icon(Icons.edit),
-                tooltip: "Edit recipe",
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-*/
   @override
   Widget build(BuildContext context) {
     final favoritesProvider = Provider.of<FavoritesProvider>(context);
@@ -110,49 +62,3 @@ class RecipeCard extends StatelessWidget {
   }
 }
 
-
-/*
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:reseptikirja/widgets/recipe_screen.dart';
-import 'package:reseptikirja/controllers/recipe_controller.dart';
-import 'package:reseptikirja/models/recipe.dart';
-
-class RecipeCard extends StatelessWidget {
-  const RecipeCard({super.key, required this.recipe});
-  final Recipe recipe;
-
-  String getName() {
-    return recipe.name!;
-  }
-
-  readMore() {
-    Get.toNamed(("recipe/ragu"));
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          ListTile(
-            leading: Icon(Icons.local_pizza_outlined),
-            title: Text(recipe.name!),
-            subtitle: Text(recipe.description!),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: <Widget>[
-              TextButton(onPressed: readMore, child: Text("Read more")),
-              IconButton(onPressed: null, icon: Icon(Icons.favorite_border)),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
-
- 
-  */

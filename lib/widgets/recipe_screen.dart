@@ -6,53 +6,62 @@ import 'package:reseptikirja/models/recipe.dart';
 import 'package:get/get.dart';
 
 class RecipeScreen extends StatelessWidget {
+  const RecipeScreen({super.key, this.recipeData});
+  final Recipe? recipeData;
+
   @override
   Widget build(BuildContext context) {
-    Recipe recipe = Get.arguments;
+    final recipe = recipeData ?? Get.arguments as Recipe;
+    if (recipe == null) {
+      return Center(child: Text("Recipe not found"));
+    }
 
     //var recipeName = Get.parameters["recipeName"];
     return Scaffold(
       appBar: AppBar(
-        title: Text("Recipes"),
-        backgroundColor: (const Color.fromARGB(255, 239, 237, 237)),
-      ),
-      body: Container(
-        padding: EdgeInsets.all(5),
-        child: Center( 
-          child: ListView(
-            children: [
-            ElevatedButton(
-              onPressed: () => Get.back(),
-              child: Text("Back to main screen"),
+        title: Text(recipe.name!)),
+      body:  Padding(
+      padding: EdgeInsets.all(10),
+      child: ListView(
+          children: [
+            SizedBox(height: 25,),
+            
+            Center(
+              child: Container(
+                padding: EdgeInsets.all(5),
+                child: Text(
+                  "Ingridients",
+                  style: TextStyle(fontStyle: FontStyle.italic),
+                ),
+              ),
             ),
-            Center(child: Container(
-              padding: EdgeInsets.all(10),
-              child: Center(
-                child: Text(recipe.name!, style: TextStyle(fontSize: 16)),
+            SizedBox(height: 15,),
+            Center(
+              child: Container(
+                padding: EdgeInsets.all(5),
+                child: Text(recipe.ingridients!),
               ),
-            )),
-            Center(child: Container(
-              padding: EdgeInsets.all(5),
-              child: Text(
-                "Ingridients",
-                style: TextStyle(fontStyle: FontStyle.italic),
+            ),
+            SizedBox(height: 25,),
+            Center(
+              child: Container(
+                padding: EdgeInsets.all(5),
+                child: Text(
+                  "Steps",
+                  style: TextStyle(fontStyle: FontStyle.italic),
+                ),
               ),
-            )),
-            Center(child: Container(
-              padding: EdgeInsets.all(5),
-              child: Text(recipe.ingridients!),
-            )),
-            Center(child :Container(
-              padding: EdgeInsets.all(5),
-              child: Text(
-                "Steps",
-                style: TextStyle(fontStyle: FontStyle.italic),
+            ),
+            SizedBox(height: 15,),
+            Center(
+              child: Container(
+                padding: EdgeInsets.all(5),
+                child: Text(recipe.steps!),
               ),
-            )),
-            Center(child: Container(padding: EdgeInsets.all(5), child: Text(recipe.steps!))),
+            ),
           ],
         ),
-      ),
+      
     ));
   }
 }

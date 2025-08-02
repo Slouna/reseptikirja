@@ -23,115 +23,86 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  late List<Widget> pages;
+  late final List<Widget> _pages;
 
   int _selectedIndex = 0;
 
-  void changeScreen(int n) {
+  void changeScreen(int index) {
     setState(() {
-      _selectedIndex = n;
+      _selectedIndex = index;
     });
   }
 
   @override
   void initState() {
     super.initState();
-    pages = [
-      HomeScreen(),
-      FavouritesScreen(),
-      NewRecipeScreen(onRecipeSaved: changeScreen),
-      RecipeScreen(),
-    ];
+    _pages = [
+    HomeScreen(),
+    FavouritesScreen(),
+    NewRecipeScreen(onRecipeSaved: changeScreen),
+  ];
   }
+
+  
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        if (constraints.maxWidth > 600) {
-          return _buildDesktopLayout();
-        } else {
-          return _buildMobileLayOut();
-        }
-      },
-    );
-  }
+    bool isDesktop = MediaQuery.of(context).size.width > 600;
 
-  Widget _buildDesktopLayout(){
-    return Scaffold(
-    appBar: AppBar(
-      title: Text("Recipes"),
-      backgroundColor: const Color.fromARGB(255, 239, 237, 237),
-    ),
-    body: Row(
-      children: [
-        NavigationRail(
-          selectedIndex: _selectedIndex,
-          onDestinationSelected: (index) {
-            setState(() {
-              _selectedIndex = index;
-            });
-          },
-          leading: IconButton(
-            icon: Icon(Icons.search),
-            onPressed: () {
-              showSearch(context: context, delegate: CustomSearchDelegate());
-            },
-          ),
-          destinations: const [
-            NavigationRailDestination(
-              icon: Icon(Icons.home),
-              label: Text('Home'),
-            ),
-            NavigationRailDestination(
-              icon: Icon(Icons.favorite),
-              label: Text('Favourites'),
-            ),
-            NavigationRailDestination(
-              icon: Icon(Icons.add),
-              label: Text('Add New'),
-            ),
-          ],
-        ),
-        Expanded(child: pages[_selectedIndex]),
-      ],
-    ),
-  );
-  }
+    
 
-  Widget _buildMobileLayOut() {
     return Scaffold(
       appBar: AppBar(
         title: Text("Recipes"),
-        actions: <Widget>[
+        actions: [
           IconButton(
             onPressed: () =>
                 showSearch(context: context, delegate: CustomSearchDelegate()),
             icon: Icon(Icons.search),
           ),
         ],
-        backgroundColor: (const Color.fromARGB(255, 239, 237, 237)),
       ),
-      body: pages[_selectedIndex],
-
-      bottomNavigationBar: BottomNavigationBar(
-        elevation: 0,
-        backgroundColor: Colors.white,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            label: 'Favourites',
-          ),
-          BottomNavigationBarItem(icon: Icon(Icons.add), label: 'Add New'),
+      body: Row(
+        children: [
+          if (isDesktop)
+            NavigationRail(
+              selectedIndex: _selectedIndex,
+              onDestinationSelected: changeScreen,
+              destinations: const [
+                NavigationRailDestination(
+                  icon: Icon(Icons.home),
+                  label: Text("Home"),
+                ),
+                NavigationRailDestination(
+                  icon: Icon(Icons.favorite),
+                  label: Text("Favorites"),
+                ),
+                NavigationRailDestination(
+                  icon: Icon(Icons.add),
+                  label: Text("New"),
+                ),
+              ],
+            ),
+          Expanded(child: _pages[_selectedIndex]),
         ],
-        currentIndex: _selectedIndex,
-        onTap: (index) {
-          setState(() {
-            _selectedIndex = index;
-          });
-        },
       ),
+      bottomNavigationBar: !isDesktop
+          ? BottomNavigationBar(
+              currentIndex: _selectedIndex,
+              onTap: changeScreen,
+              items: const [
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.home), label: "Home"
+                  ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.favorite), label: "Favorites",
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.add), label: "New"
+                ),
+              ],
+            )
+          : null,
     );
   }
 }

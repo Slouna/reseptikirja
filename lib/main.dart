@@ -18,10 +18,11 @@ Future<void> main() async {
     ChangeNotifierProvider(
       create: (_) => FavoritesProvider(),
       child: GetMaterialApp(
-        initialRoute: "/",
+        title: 'Recipes App',
+        initialRoute: '/',
         getPages: [
-          GetPage(name: "/", page: () => MainPage()),
-          GetPage(name: "/recipe/:recipeName", page: () => RecipeScreen()),
+          GetPage(name: '/', page: () => MainPage()),
+          GetPage(name: '/recipe', page: () => RecipeScreen()),
         ],
       ),
     ),
