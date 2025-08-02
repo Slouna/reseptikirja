@@ -8,7 +8,6 @@ import 'custom_search_delegate.dart';
 import 'package:reseptikirja/models/recipe.dart';
 
 /* 
-   TODO: change view on different screen sizes
    TODO: make single recipe cite nicer
    TODO: edit and delete reipes
    TODO: clean imports
@@ -47,6 +46,60 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        if (constraints.maxWidth > 600) {
+          return _buildDesktopLayout();
+        } else {
+          return _buildMobileLayOut();
+        }
+      },
+    );
+  }
+
+  Widget _buildDesktopLayout(){
+    return Scaffold(
+    appBar: AppBar(
+      title: Text("Recipes"),
+      backgroundColor: const Color.fromARGB(255, 239, 237, 237),
+    ),
+    body: Row(
+      children: [
+        NavigationRail(
+          selectedIndex: _selectedIndex,
+          onDestinationSelected: (index) {
+            setState(() {
+              _selectedIndex = index;
+            });
+          },
+          leading: IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () {
+              showSearch(context: context, delegate: CustomSearchDelegate());
+            },
+          ),
+          destinations: const [
+            NavigationRailDestination(
+              icon: Icon(Icons.home),
+              label: Text('Home'),
+            ),
+            NavigationRailDestination(
+              icon: Icon(Icons.favorite),
+              label: Text('Favourites'),
+            ),
+            NavigationRailDestination(
+              icon: Icon(Icons.add),
+              label: Text('Add New'),
+            ),
+          ],
+        ),
+        Expanded(child: pages[_selectedIndex]),
+      ],
+    ),
+  );
+  }
+
+  Widget _buildMobileLayOut() {
     return Scaffold(
       appBar: AppBar(
         title: Text("Recipes"),
