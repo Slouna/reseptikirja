@@ -18,7 +18,9 @@ class RecipeScreen extends StatelessWidget {
 
     //var recipeName = Get.parameters["recipeName"];
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 106, 102, 102),
       appBar: AppBar(
+        backgroundColor: Color.fromARGB(255, 162, 162, 157),
         title: Text(recipe.name!)),
       body:  Padding(
       padding: EdgeInsets.all(10),

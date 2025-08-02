@@ -52,7 +52,9 @@ class _MainPageState extends State<MainPage> {
     
 
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 106, 102, 102),
       appBar: AppBar(
+        backgroundColor: Color.fromARGB(255, 162, 162, 157),
         title: Text("Recipes"),
         actions: [
           IconButton(
@@ -66,6 +68,7 @@ class _MainPageState extends State<MainPage> {
         children: [
           if (isDesktop)
             NavigationRail(
+              backgroundColor: Color.fromARGB(255, 162, 162, 157),
               selectedIndex: _selectedIndex,
               onDestinationSelected: changeScreen,
               destinations: const [
@@ -88,6 +91,7 @@ class _MainPageState extends State<MainPage> {
       ),
       bottomNavigationBar: !isDesktop
           ? BottomNavigationBar(
+            backgroundColor: Color.fromARGB(255, 162, 162, 157),
               currentIndex: _selectedIndex,
               onTap: changeScreen,
               items: const [

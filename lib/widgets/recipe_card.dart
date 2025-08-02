@@ -18,6 +18,7 @@ class RecipeCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final favoritesProvider = Provider.of<FavoritesProvider>(context);
     return Card(
+      color: const Color.fromARGB(255, 242, 249, 165),
       child: ExpandablePanel(
         header: Container(
           padding: EdgeInsets.all(5),
