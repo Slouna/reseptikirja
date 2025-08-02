@@ -7,8 +7,17 @@ class CustomSearchDelegate extends SearchDelegate {
   static final recipeController = Get.find<RecipeController>();
 
   List<String> searchTerms = recipeController.recipes
-                  .map((recipe) => recipe.name!.toString())
-                  .toList();
+      .map((recipe) => recipe.name!.toString())
+      .toList();
+
+  Recipe findByName(String name) {
+    for (var i in recipeController.recipes) {
+      if (i.name == name) {
+        return i;
+      }
+    }
+    throw ArgumentError(name);
+  }
 
   @override
   List<Widget>? buildActions(BuildContext context) {
@@ -35,10 +44,12 @@ class CustomSearchDelegate extends SearchDelegate {
       itemCount: matchQuery.length,
       itemBuilder: (context, index) {
         var result = matchQuery[index];
-        return ListTile(title: Text(result));
+        return ListTile(
+          title: Text(result),
+          onTap: () => Get.toNamed("/recipe/${result}", arguments: findByName(result)),
+        );
       },
     );
-  
   }
 
   @override
@@ -53,7 +64,8 @@ class CustomSearchDelegate extends SearchDelegate {
       itemCount: matchQuery.length,
       itemBuilder: (context, index) {
         var result = matchQuery[index];
-        return ListTile(title: Text(result));
+        return ListTile(title: Text(result),
+        onTap: () => Get.toNamed("/recipe/${result}", arguments: findByName(result)),);
       },
     );
   }

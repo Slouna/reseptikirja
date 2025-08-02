@@ -6,7 +6,7 @@ import 'package:reseptikirja/widgets/new_recipe_screen.dart';
 import 'package:reseptikirja/widgets/recipe_screen.dart';
 import 'custom_search_delegate.dart';
 
-/* TODO: add search function -> add navigation 
+/* 
    TODO: add favourites
    TODO: change view on different screen sizes
    TODO: make single recipe cite nicer
