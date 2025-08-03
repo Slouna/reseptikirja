@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:reseptikirja/main.dart';
 import 'package:reseptikirja/widgets/favourites_screen.dart';
 import 'package:reseptikirja/widgets/new_recipe_screen.dart';
-import 'package:reseptikirja/widgets/recipe_screen.dart';
 import 'custom_search_delegate.dart';
-import 'package:reseptikirja/models/recipe.dart';
 
 /* 
    TODO: make single recipe cite nicer

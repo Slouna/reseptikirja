@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
-import 'package:reseptikirja/controllers/recipe_controller.dart';
-import 'package:reseptikirja/widgets/recipe_card.dart';
 import 'package:reseptikirja/models/recipe.dart';
 import 'package:get/get.dart';
 
@@ -12,16 +9,15 @@ class RecipeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final recipe = recipeData ?? Get.arguments as Recipe;
-    if (recipe == null) {
-      return Center(child: Text("Recipe not found"));
-    }
+    
 
     //var recipeName = Get.parameters["recipeName"];
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 106, 102, 102),
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 162, 162, 157),
-        title: Text(recipe.name!)),
+        title: Text(recipe.name!),
+        actions: [IconButton(onPressed: null, icon: Icon(Icons.edit))],),
       body:  Padding(
       padding: EdgeInsets.all(10),
       child: ListView(

@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:reseptikirja/controllers/recipe_controller.dart';
-import 'package:reseptikirja/main.dart';
 import 'package:reseptikirja/models/recipe.dart';
 import 'package:get/get.dart';
-import 'package:reseptikirja/widgets/main_page.dart';
 
 class NewRecipeScreen extends StatelessWidget {
   final recipeController = Get.find<RecipeController>();

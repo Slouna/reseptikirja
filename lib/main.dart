@@ -3,8 +3,6 @@ import 'package:get/get.dart';
 import 'package:reseptikirja/controllers/recipe_controller.dart';
 import 'package:reseptikirja/models/recipe.dart';
 import 'package:reseptikirja/widgets/main_page.dart';
-import 'package:reseptikirja/widgets/favourites_screen.dart';
-import 'package:reseptikirja/widgets/recipe_card.dart';
 import 'package:reseptikirja/widgets/recipe_list_view.dart';
 import 'package:hive_ce_flutter/hive_flutter.dart';
 import 'package:reseptikirja/widgets/recipe_screen.dart';
