@@ -27,6 +27,15 @@ class RecipeController {
     _save();
   }
 
+  void edit(Recipe recipe, Recipe newRecipe) {
+    for (Recipe r in recipes) {
+      if (recipe == r) {
+        r = newRecipe;
+      }
+    }
+    _save();
+  }
+
   void delete(Recipe recipe) {
     recipes.remove(recipe);
     recipes.refresh();

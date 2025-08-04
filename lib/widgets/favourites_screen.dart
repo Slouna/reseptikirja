@@ -6,8 +6,9 @@ class FavouritesScreen extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-    return   Center(child: Center(
-      child: RecipeListView(favourites: true,),),
+    return   Container(
+      padding: EdgeInsets.all(10),
+      child: RecipeListView(favourites: true,),
       
     );
   }
