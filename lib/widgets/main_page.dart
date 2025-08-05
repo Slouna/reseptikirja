@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/instance_manager.dart';
+import 'package:reseptikirja/controllers/recipe_controller.dart';
 import 'package:reseptikirja/main.dart';
 import 'package:reseptikirja/widgets/favourites_screen.dart';
 import 'package:reseptikirja/widgets/new_recipe_screen.dart';
@@ -23,7 +25,7 @@ class _MainPageState extends State<MainPage> {
   late final List<Widget> _pages;
 
   int _selectedIndex = 0;
-
+  final recipeController = Get.find<RecipeController>();
   void changeScreen(int index) {
     setState(() {
       _selectedIndex = index;
@@ -34,19 +36,22 @@ class _MainPageState extends State<MainPage> {
   void initState() {
     super.initState();
     _pages = [
-    HomeScreen(),
-    FavouritesScreen(),
-    NewRecipeScreen(onRecipeSaved: changeScreen),
-  ];
+      HomeScreen(),
+      FavouritesScreen(),
+      NewRecipeScreen(onRecipeSaved: changeScreen),
+    ];
   }
 
-  
+  void printRecipes() {
+    for (var i in recipeController.recipes) {
+      print(i.name);
+      print(i.description);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     bool isDesktop = MediaQuery.of(context).size.width > 600;
-
-    
 
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 106, 102, 102),
@@ -58,6 +63,10 @@ class _MainPageState extends State<MainPage> {
             onPressed: () =>
                 showSearch(context: context, delegate: CustomSearchDelegate()),
             icon: Icon(Icons.search),
+          ),
+          ElevatedButton(
+            onPressed: (() => printRecipes()),
+            child: Text("debug"),
           ),
         ],
       ),
@@ -88,19 +97,16 @@ class _MainPageState extends State<MainPage> {
       ),
       bottomNavigationBar: !isDesktop
           ? BottomNavigationBar(
-            backgroundColor: Color.fromARGB(255, 162, 162, 157),
+              backgroundColor: Color.fromARGB(255, 162, 162, 157),
               currentIndex: _selectedIndex,
               onTap: changeScreen,
               items: const [
+                BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.home), label: "Home"
-                  ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.favorite), label: "Favorites",
+                  icon: Icon(Icons.favorite),
+                  label: "Favorites",
                 ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.add), label: "New"
-                ),
+                BottomNavigationBarItem(icon: Icon(Icons.add), label: "New"),
               ],
             )
           : null,

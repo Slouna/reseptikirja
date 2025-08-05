@@ -27,12 +27,15 @@ class RecipeController {
     _save();
   }
 
-  void edit(Recipe recipe, Recipe newRecipe) {
+  void updateRecipe(Recipe originalRecipe, Recipe updatedRecipe) {
+    int i = 0;
     for (Recipe r in recipes) {
-      if (recipe == r) {
-        r = newRecipe;
+      if (r == originalRecipe) {
+        break;
       }
+      i++;
     }
+    recipes[i] = updatedRecipe;
     _save();
   }
 

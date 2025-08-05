@@ -6,148 +6,89 @@ import 'package:reseptikirja/controllers/recipe_controller.dart';
 import 'package:get/get.dart';
 
 // ignore: must_be_immutable
-class EditRecipePage extends StatelessWidget {
+class EditRecipePage extends StatefulWidget {
   EditRecipePage({super.key, required this.recipe});
-  Recipe recipe;
+  final Recipe recipe;
+
+  @override
+  State<EditRecipePage> createState() => _EditRecipePage();
+}
+
+class _EditRecipePage extends State<EditRecipePage> {
+  late TextEditingController nameController;
+  late TextEditingController descriptionController;
+  late TextEditingController ingredientsController;
+  late TextEditingController stepsController;
+
   final recipeController = Get.find<RecipeController>();
-  static final _formKey = GlobalKey<FormBuilderState>();
 
-  _submit(Recipe originalRecipe) {
-    if (_formKey.currentState!.saveAndValidate()) {
-      Recipe newRecipe = Recipe(
-        _formKey.currentState!.value['name'],
-        _formKey.currentState!.value["description"],
-        _formKey.currentState!.value["ingridients"],
-        _formKey.currentState!.value["steps"],
-        _formKey.currentState!.value["vegan"],
-        _formKey.currentState!.value["vegetarian"],
-        _formKey.currentState!.value["glutenFree"],
-      );
-
-      recipeController.edit(originalRecipe, newRecipe);
-      _formKey.currentState?.reset();
-    }
-    Get.back();
+  @override
+  void initState() {
+    super.initState();
+    nameController = TextEditingController(text: widget.recipe.name);
+    descriptionController = TextEditingController(
+      text: widget.recipe.description,
+    );
+    ingredientsController = TextEditingController(
+      text: widget.recipe.ingridients,
+    );
+    stepsController = TextEditingController(text: widget.recipe.steps);
   }
 
-  // _delete() {}
-
   @override
+  void dispose() {
+    nameController.dispose();
+    descriptionController.dispose();
+    ingredientsController.dispose();
+    stepsController.dispose();
+    super.dispose();
+  }
+
+  void saveRecipe() {
+    Recipe updatedRecipe = Recipe(
+      nameController.text,
+      descriptionController.text,
+      ingredientsController.text,
+      stepsController.text,
+      widget.recipe.vegan,
+      widget.recipe.vegetarian,
+      widget.recipe.glutenFree,
+    );
+
+    recipeController.updateRecipe(widget.recipe, updatedRecipe);
+
+    Get.back(result: updatedRecipe);
+  }
+
   @override
   Widget build(BuildContext context) {
-    print(1);
-    Recipe originalRecipe = recipe;
-    print(1);
-    return Scaffold(body: Container(
-      padding: EdgeInsets.all(10),
-      margin: EdgeInsets.all(20),
-      child: FormBuilder(
-        key: _formKey,
+    return Scaffold(
+      appBar: AppBar(title: Text("Edit Recipe")),
+      body: Padding(
+        padding: EdgeInsets.all(16),
         child: ListView(
           children: [
-            Container(
-              padding: EdgeInsets.all(5),
-              child: FormBuilderTextField(
-                name: "name",
-                keyboardType: TextInputType.multiline,
-                maxLines: null,
-                decoration: InputDecoration(
-                  hintText: "Name of the Dish",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(4.0)),
-                  ),
-                ),
-                autovalidateMode: AutovalidateMode.always,
-                validator: FormBuilderValidators.required(),
-              ),
+            TextField(
+              controller: nameController,
+              decoration: InputDecoration(labelText: "Name"),
             ),
-
-            Container(
-              padding: EdgeInsets.all(5),
-              child: FormBuilderTextField(
-                name: "description",
-                keyboardType: TextInputType.multiline,
-                maxLines: null,
-                minLines: 2,
-                decoration: InputDecoration(
-                  hintText: "Short Description",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(4.0)),
-                  ),
-                ),
-                autovalidateMode: AutovalidateMode.always,
-                validator: FormBuilderValidators.required(),
-              ),
+            TextField(
+              controller: descriptionController,
+              decoration: InputDecoration(labelText: "Description"),
             ),
-
-            Container(
-              padding: EdgeInsets.all(5),
-              child: FormBuilderTextField(
-                name: "ingridients",
-                keyboardType: TextInputType.multiline,
-                maxLines: null,
-                minLines: 4,
-                decoration: InputDecoration(
-                  hintText: "Ingridents",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(4.0)),
-                  ),
-                ),
-                autovalidateMode: AutovalidateMode.always,
-                validator: FormBuilderValidators.required(),
-              ),
+            TextField(
+              controller: ingredientsController,
+              decoration: InputDecoration(labelText: "Ingredients"),
             ),
-
-            Container(
-              padding: EdgeInsets.all(5),
-              child: FormBuilderTextField(
-                name: "steps",
-                keyboardType: TextInputType.multiline,
-                maxLines: null,
-                minLines: 4,
-                decoration: InputDecoration(
-                  hintText: "Steps",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(4.0)),
-                  ),
-                ),
-                autovalidateMode: AutovalidateMode.always,
-                validator: FormBuilderValidators.required(),
-              ),
+            TextField(
+              controller: stepsController,
+              decoration: InputDecoration(labelText: "Steps"),
             ),
-
-            Container(
-              padding: EdgeInsets.all(5),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: FormBuilderCheckbox(
-                      name: "vegan",
-                      title: Text("Vegan"),
-                    ),
-                  ),
-                  Expanded(
-                    child: FormBuilderCheckbox(
-                      name: "vegetarian",
-                      title: Text("Vegetarian"),
-                    ),
-                  ),
-                  Expanded(
-                    child: FormBuilderCheckbox(
-                      name: "glutenFree",
-                      title: Text("Gluten Free"),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            ElevatedButton(
-              onPressed: null, //_submit(originalRecipe),
-              child: Text("Save Recipe"),
-            ),
+            SizedBox(height: 20),
+            ElevatedButton(onPressed: saveRecipe, child: Text("Save")),
           ],
         ),
       ),
-    ));
+    );
   }
 }
