@@ -15,13 +15,13 @@ class NewRecipeScreen extends StatelessWidget {
   _submit() {
     if (_formKey.currentState!.saveAndValidate()) {
       Recipe recipe = Recipe(
-        _formKey.currentState!.value['name'],
-        _formKey.currentState!.value["description"],
-        _formKey.currentState!.value["ingridients"],
-        _formKey.currentState!.value["steps"],
-        _formKey.currentState!.value["vegan"],
-        _formKey.currentState!.value["vegetarian"],
-        _formKey.currentState!.value["glutenFree"],
+        name: _formKey.currentState!.value['name'],
+        description: _formKey.currentState!.value["description"],
+        ingridients: _formKey.currentState!.value["ingridients"],
+        steps: _formKey.currentState!.value["steps"],
+        vegan: _formKey.currentState!.value["vegan"],
+        vegetarian: _formKey.currentState!.value["vegetarian"],
+        glutenFree: _formKey.currentState!.value["glutenFree"],
       );
 
       recipeController.add(recipe);

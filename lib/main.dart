@@ -20,7 +20,10 @@ Future<void> main() async {
         initialRoute: '/',
         getPages: [
           GetPage(name: '/', page: () => MainPage()),
-          GetPage(name: '/recipe', page: () => RecipeScreen()),
+          GetPage(name: '/recipe/:id', page: () {
+            final id = Get.parameters['id']!;
+            return RecipeScreen(recipeId: id,);
+          })
         ],
       ),
     ),

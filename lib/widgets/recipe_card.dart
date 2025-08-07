@@ -48,7 +48,7 @@ class RecipeCard extends StatelessWidget {
                   },
                 ),
                 IconButton(
-                  onPressed: () => Get.toNamed("/recipe/${recipe.name}", arguments: (recipe)),
+                  onPressed: () => Get.toNamed("/recipe/${recipe.id}"),
                   icon: const Icon(Icons.edit),
                   tooltip: "Edit recipe",
                 ),

@@ -12,9 +12,9 @@ class RecipeController {
       storage.put("recipes", []);
     }
 
-    recipes.value = storage
-        .get("recipes")
-        .map((recipe) => Recipe.fromJson(recipe))
+    recipes.value = (storage
+        .get("recipes") as List)
+        .map((recipe) => Recipe.fromJson(Map<String, dynamic>.from(recipe)))
         .toList();
   }
 
@@ -28,20 +28,12 @@ class RecipeController {
   }
 
   void updateRecipe(Recipe originalRecipe, Recipe updatedRecipe) {
-    int i = 0;
-    for (Recipe r in recipes) {
-      if (r == originalRecipe) {
-        break;
-      }
-      i++;
-    }
-    recipes[i] = updatedRecipe;
+    recipes[recipes.indexWhere((r) => r == originalRecipe)] = updatedRecipe;
     _save();
   }
 
   void delete(Recipe recipe) {
-    recipes.remove(recipe);
-    recipes.refresh();
+    recipes.removeWhere((r) => r.id == recipe.id);
     _save();
   }
 

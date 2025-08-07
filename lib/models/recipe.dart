@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
+
+var uuid = Uuid();
 
 class Recipe {
+  final String id;
   final String? name;
   final String? description;
   final String? ingridients;
@@ -10,7 +14,8 @@ class Recipe {
   final bool? vegetarian;
   final bool? glutenFree;
 
-  Recipe(
+  Recipe({
+    String? id,
     this.name,
     this.description,
     this.ingridients,
@@ -18,9 +23,11 @@ class Recipe {
     this.vegan,
     this.vegetarian,
     this.glutenFree,
-  );
+  }) : id = id ?? uuid.v4();
 
-  Map toJson() => {
+
+  Map<String, dynamic> toJson() => {
+    'id': id,
     'name': name,
     'description': description,
     'ingridients': ingridients,
@@ -30,15 +37,16 @@ class Recipe {
     'glutenFree': glutenFree,
   };
 
-  factory Recipe.fromJson(Map json) {
+  factory Recipe.fromJson(Map<String, dynamic> json) {
     return Recipe(
-      json['name'],
-      json['description'],
-      json['ingridients'],
-      json['steps'],
-      json['vegan'],
-      json['vegetarian'],
-      json['glutenFree'],
+      id: json['id'],
+      name: json['name'],
+      description: json['description'],
+      ingridients:  json['ingridients'],
+      steps: json['steps'],
+      vegan:  json['vegan'],
+      vegetarian:  json['vegetarian'],
+      glutenFree:  json['glutenFree'],
     );
   }
 
