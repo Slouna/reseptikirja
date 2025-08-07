@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:reseptikirja/controllers/recipe_controller.dart';
-import 'package:reseptikirja/models/recipe.dart';
 import 'package:get/get.dart';
 import 'package:reseptikirja/widgets/edit_recipe_page.dart';
-import 'package:hive_ce_flutter/hive_flutter.dart';
 
 class RecipeScreen extends StatelessWidget {
   RecipeScreen({super.key, required this.recipeId});

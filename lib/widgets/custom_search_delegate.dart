@@ -46,7 +46,8 @@ class CustomSearchDelegate extends SearchDelegate {
         var result = matchQuery[index];
         return ListTile(
           title: Text(result),
-          onTap: () => Get.toNamed("/recipe/${result}", arguments: findByName(result)),
+          onTap: () =>
+              Get.toNamed("/recipe/${result}", arguments: findByName(result)),
         );
       },
     );
@@ -64,8 +65,11 @@ class CustomSearchDelegate extends SearchDelegate {
       itemCount: matchQuery.length,
       itemBuilder: (context, index) {
         var result = matchQuery[index];
-        return ListTile(title: Text(result),
-        onTap: () => Get.toNamed("/recipe/${result}", arguments: findByName(result)),);
+        return ListTile(
+          title: Text(result),
+          onTap: () =>
+              Get.toNamed("/recipe/${result}", arguments: findByName(result)),
+        );
       },
     );
   }

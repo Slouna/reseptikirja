@@ -7,10 +7,12 @@ import 'package:reseptikirja/widgets/recipe_list_view.dart';
 import 'package:hive_ce_flutter/hive_flutter.dart';
 import 'package:reseptikirja/widgets/recipe_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:reseptikirja/providers/favorites_provider.dart';
 
 Future<void> main() async {
   await Hive.initFlutter();
   await Hive.openBox("storage");
+  await Hive.openBox("favorites");
   Get.lazyPut<RecipeController>(() => RecipeController());
   runApp(
     ChangeNotifierProvider(
@@ -20,10 +22,13 @@ Future<void> main() async {
         initialRoute: '/',
         getPages: [
           GetPage(name: '/', page: () => MainPage()),
-          GetPage(name: '/recipe/:id', page: () {
-            final id = Get.parameters['id']!;
-            return RecipeScreen(recipeId: id,);
-          })
+          GetPage(
+            name: '/recipe/:id',
+            page: () {
+              final id = Get.parameters['id']!;
+              return RecipeScreen(recipeId: id);
+            },
+          ),
         ],
       ),
     ),
@@ -37,7 +42,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(10),
-      child: RecipeListView(favourites: false),
+      child: RecipeListView(favorites: false),
     );
   }
 }

@@ -58,22 +58,3 @@ class Recipe {
   @override
   int get hashCode => name.hashCode;
 }
-
-class FavoritesProvider with ChangeNotifier {
-  final List<Recipe> _favorites = [];
-
-  List<Recipe> get favorites => _favorites;
-
-  void toggleFavorite(Recipe recipe) {
-    if (_favorites.contains(recipe)) {
-      _favorites.remove(recipe);
-    } else {
-      _favorites.add(recipe);
-    }
-    notifyListeners();
-  }
-
-  bool isFavorite(Recipe recipe) {
-    return _favorites.contains(recipe);
-  }
-}

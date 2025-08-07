@@ -5,9 +5,9 @@ import 'package:hive_ce_flutter/hive_flutter.dart';
 class RecipeController {
   final storage = Hive.box("storage");
 
-  RxList recipes;
+  RxList <Recipe> recipes;
 
-  RecipeController() : recipes = [].obs {
+  RecipeController() : recipes = <Recipe>[].obs {
     if (storage.get("recipes") == null) {
       storage.put("recipes", []);
     }

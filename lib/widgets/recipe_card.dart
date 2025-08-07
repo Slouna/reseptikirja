@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reseptikirja/models/recipe.dart';
 import 'package:provider/provider.dart';
+import 'package:reseptikirja/providers/favorites_provider.dart';
 
 class RecipeCard extends StatelessWidget {
   RecipeCard({super.key, required this.recipe});
@@ -39,12 +40,12 @@ class RecipeCard extends StatelessWidget {
               children: [
                 IconButton(
                   icon: Icon(
-                    favoritesProvider.isFavorite(recipe)
+                    favoritesProvider.isFavorite(recipe.id)
                         ? Icons.favorite
                         : Icons.favorite_border,
                   ),
                   onPressed: () {
-                    favoritesProvider.toggleFavorite(recipe);
+                    favoritesProvider.toggleFavorite(recipe.id);
                   },
                 ),
                 IconButton(
