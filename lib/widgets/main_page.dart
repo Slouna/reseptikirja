@@ -8,7 +8,7 @@ import 'custom_search_delegate.dart';
 
 /* 
    TODO: make single recipe cite nicer
-   TODO: edit and delete reipes
+   TODO: delete recipes
    TODO: clean imports
 
 

@@ -28,6 +28,7 @@ class NewRecipeScreen extends StatelessWidget {
       _formKey.currentState?.reset();
     }
     onRecipeSaved(0);
+    Get.snackbar("Success", "Recipe added successfully!");
   }
 
   @override
@@ -44,7 +45,7 @@ class NewRecipeScreen extends StatelessWidget {
               child: FormBuilderTextField(
                 name: "name",
                 keyboardType: TextInputType.multiline,
-                maxLines: null,
+                maxLines: 1,
                 decoration: InputDecoration(
                   hintText: "Name of the Dish",
                   border: OutlineInputBorder(
