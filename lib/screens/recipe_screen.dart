@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:reseptikirja/controllers/recipe_controller.dart';
 import 'package:get/get.dart';
+import 'package:reseptikirja/models/recipe.dart';
 import 'package:reseptikirja/screens/edit_recipe_page.dart';
+import 'package:reseptikirja/utils/utils.dart';
 
 class RecipeScreen extends StatelessWidget {
   RecipeScreen({super.key, required this.recipeId});
@@ -16,24 +18,30 @@ class RecipeScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 162, 162, 157),
         title: Obx(() {
-          final recipe = recipeController.recipes.firstWhere(
+          final recipe = recipeController.recipes.firstWhereOrNull(
             (r) => r.id == recipeId,
           );
+          if (recipe == null) {
+            Get.toNamed("/");
+            return SizedBox();
+          }
           return Text(recipe.name ?? "");
-          
         }),
         actions: [
           IconButton(
-            onPressed:() => Get.toNamed("/"),
-             icon: Icon(Icons.home_outlined)
-          )
+            onPressed: () => Get.toNamed("/"),
+            icon: Icon(Icons.home_outlined),
+          ),
         ],
-        
       ),
       body: Obx(() {
-        final recipe = recipeController.recipes.firstWhere(
+        final Recipe? recipe = recipeController.recipes.firstWhereOrNull(
           (r) => r.id == recipeId,
         );
+        if (recipe == null) {
+          Future.microtask(() => Get.toNamed("/"));
+          return SizedBox();
+        }
         return ListView(
           children: [
             SizedBox(height: 25),
@@ -80,12 +88,24 @@ class RecipeScreen extends StatelessWidget {
                     await Get.to(() => EditRecipePage(recipeId: recipeId));
                   },
                 ),
-                IconButton(onPressed: null, icon: Icon(Icons.delete_outline)),
+                IconButton(
+                  onPressed: () {
+                    showDeleteConfirmation(
+                      onConfirm: () {
+                        recipeController.delete(recipe);
+                        Get.toNamed("/");
+                        Get.snackbar("Deleted", "Recipe deleted successfully");
+                      },
+                      context: context,
+                    );
+                  },
+                  icon: Icon(Icons.delete_outline),
+                ),
               ],
             ),
           ],
         );
-      })
+      }),
     );
   }
 }

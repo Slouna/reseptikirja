@@ -4,6 +4,7 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:reseptikirja/controllers/recipe_controller.dart';
 import 'package:reseptikirja/models/recipe.dart';
 import 'package:get/get.dart';
+import 'package:reseptikirja/utils/utils.dart';
 
 class NewRecipeScreen extends StatelessWidget {
   final recipeController = Get.find<RecipeController>();
@@ -27,8 +28,9 @@ class NewRecipeScreen extends StatelessWidget {
       recipeController.add(recipe);
       _formKey.currentState?.reset();
     }
+    showSuccess("Recipe added successfully!");
     onRecipeSaved(0);
-    Get.snackbar("Success", "Recipe added successfully!");
+    
   }
 
   @override

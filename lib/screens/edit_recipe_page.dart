@@ -4,6 +4,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:reseptikirja/controllers/recipe_controller.dart';
 import 'package:get/get.dart';
+import 'package:reseptikirja/utils/utils.dart';
 
 // ignore: must_be_immutable
 class EditRecipePage extends StatefulWidget {
@@ -57,8 +58,9 @@ class _EditRecipePage extends State<EditRecipePage> {
       );
       recipeController.updateRecipe(recipe, updatedRecipe);
       _formKey.currentState?.reset();
-
+      
       Get.back(result: updatedRecipe);
+      showSuccess("Recipe edited!");
     }
   }
 
