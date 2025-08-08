@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:reseptikirja/controllers/recipe_controller.dart';
 import 'package:get/get.dart';
-import 'package:reseptikirja/widgets/edit_recipe_page.dart';
+import 'package:reseptikirja/screens/edit_recipe_page.dart';
 
 class RecipeScreen extends StatelessWidget {
   RecipeScreen({super.key, required this.recipeId});

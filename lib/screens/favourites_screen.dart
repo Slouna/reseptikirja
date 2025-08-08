@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:reseptikirja/widgets/recipe_list_view.dart';
+import 'package:reseptikirja/screens/recipe_list_view.dart';
 
 class FavouritesScreen extends StatelessWidget {
   FavouritesScreen({super.key});

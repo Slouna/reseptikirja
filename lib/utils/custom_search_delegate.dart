@@ -5,18 +5,19 @@ import 'package:reseptikirja/models/recipe.dart';
 
 class CustomSearchDelegate extends SearchDelegate {
   static final recipeController = Get.find<RecipeController>();
+  List<Recipe> get recipes => recipeController.recipes;
 
   List<String> searchTerms = recipeController.recipes
       .map((recipe) => recipe.name!.toString())
       .toList();
 
-  Recipe findByName(String name) {
+  Recipe findById(String id) {
     for (var i in recipeController.recipes) {
-      if (i.name == name) {
+      if (i.id == id) {
         return i;
       }
     }
-    throw ArgumentError(name);
+    throw ArgumentError(id);
   }
 
   @override
@@ -34,20 +35,20 @@ class CustomSearchDelegate extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    List<String> matchQuery = [];
-    for (var recipe in searchTerms) {
-      if (recipe.toLowerCase().contains(query.toLowerCase())) {
-        matchQuery.add(recipe);
-      }
-    }
+    List<Recipe> matchQuery = recipes
+        .where((recipe) =>
+            recipe.name != null &&
+            recipe.name!.toLowerCase().contains(query.toLowerCase()))
+        .toList();
+    
     return ListView.builder(
       itemCount: matchQuery.length,
       itemBuilder: (context, index) {
-        var result = matchQuery[index];
+        var recipe = matchQuery[index];
         return ListTile(
-          title: Text(result),
+          title: Text(recipe.name ?? "Unnamed recipe"),
           onTap: () =>
-              Get.toNamed("/recipe/${result}", arguments: findByName(result)),
+              Get.toNamed("/recipe/${recipe.id}", arguments: findById(recipe.id)),
         );
       },
     );
@@ -55,20 +56,20 @@ class CustomSearchDelegate extends SearchDelegate {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    List<String> matchQuery = [];
-    for (var recipe in searchTerms) {
-      if (recipe.toLowerCase().contains(query.toLowerCase())) {
-        matchQuery.add(recipe);
-      }
-    }
+    List<Recipe> matchQuery = recipes
+        .where((recipe) =>
+            recipe.name != null &&
+            recipe.name!.toLowerCase().contains(query.toLowerCase()))
+        .toList();
+    
     return ListView.builder(
       itemCount: matchQuery.length,
       itemBuilder: (context, index) {
-        var result = matchQuery[index];
+        var recipe = matchQuery[index];
         return ListTile(
-          title: Text(result),
+          title: Text(recipe.name ?? "Unnamed recipe"),
           onTap: () =>
-              Get.toNamed("/recipe/${result}", arguments: findByName(result)),
+              Get.toNamed("/recipe/${recipe.id}", arguments: findById(recipe.id)),
         );
       },
     );
