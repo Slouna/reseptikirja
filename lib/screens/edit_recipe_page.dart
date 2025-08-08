@@ -67,14 +67,21 @@ class _EditRecipePage extends State<EditRecipePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Edit Recipe")),
+      backgroundColor: const Color.fromARGB(255, 228, 185, 185),
+      appBar: AppBar(
+        title: Text("Edit Recipe"),
+        backgroundColor: Color.fromARGB(255, 211, 179, 217),
+        
+      ),
       body: Padding(
         padding: EdgeInsets.all(16),
         child: FormBuilder(
           key: _formKey,
           child: ListView(
             children: [
-              FormBuilderTextField(
+              Container(
+              padding: EdgeInsets.all(5),
+              child: FormBuilderTextField(
                 name: "name",
                 initialValue: recipe.name,
                 keyboardType: TextInputType.multiline,
@@ -88,7 +95,10 @@ class _EditRecipePage extends State<EditRecipePage> {
                 autovalidateMode: AutovalidateMode.always,
                 validator: FormBuilderValidators.required(),
               ),
-              FormBuilderTextField(
+              ),
+              Container(
+              padding: EdgeInsets.all(5),
+              child: FormBuilderTextField(
                 name: "description",
                 initialValue: recipe.description,
                 keyboardType: TextInputType.multiline,
@@ -103,7 +113,10 @@ class _EditRecipePage extends State<EditRecipePage> {
                 autovalidateMode: AutovalidateMode.always,
                 validator: FormBuilderValidators.required(),
               ),
-              FormBuilderTextField(
+              ),
+              Container(
+              padding: EdgeInsets.all(5),
+              child: FormBuilderTextField(
                 name: "ingridients",
                 initialValue: recipe.ingridients,
                 keyboardType: TextInputType.multiline,
@@ -118,7 +131,10 @@ class _EditRecipePage extends State<EditRecipePage> {
                 autovalidateMode: AutovalidateMode.always,
                 validator: FormBuilderValidators.required(),
               ),
-              FormBuilderTextField(
+              ),
+              Container(
+              padding: EdgeInsets.all(5),
+              child: FormBuilderTextField(
                 name: "steps",
                 initialValue: recipe.steps,
                 keyboardType: TextInputType.multiline,
@@ -132,6 +148,7 @@ class _EditRecipePage extends State<EditRecipePage> {
                 ),
                 autovalidateMode: AutovalidateMode.always,
                 validator: FormBuilderValidators.required(),
+              ),
               ),
               SizedBox(height: 20),
               ElevatedButton(

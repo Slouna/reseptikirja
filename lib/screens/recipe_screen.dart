@@ -14,9 +14,9 @@ class RecipeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 106, 102, 102),
+      backgroundColor: const Color.fromARGB(255, 228, 185, 185),
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 162, 162, 157),
+        backgroundColor: Color.fromARGB(255, 211, 179, 217),
         title: Obx(() {
           final recipe = recipeController.recipes.firstWhereOrNull(
             (r) => r.id == recipeId,

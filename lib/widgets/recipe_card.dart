@@ -17,7 +17,7 @@ class RecipeCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final favoritesProvider = Provider.of<FavoritesProvider>(context);
     return Card(
-      color: const Color.fromARGB(255, 242, 249, 165),
+      color: Color.fromARGB(255, 211, 179, 217),
       child: ExpandablePanel(
         header: Container(
           padding: EdgeInsets.all(5),
@@ -48,10 +48,9 @@ class RecipeCard extends StatelessWidget {
                     favoritesProvider.toggleFavorite(recipe.id);
                   },
                 ),
-                IconButton(
+                TextButton(
                   onPressed: () => Get.toNamed("/recipe/${recipe.id}"),
-                  icon: const Icon(Icons.edit),
-                  tooltip: "Edit recipe",
+                  child: const Text("Go to recipe"),
                 ),
               ],
             ),

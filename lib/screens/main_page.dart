@@ -54,9 +54,9 @@ class _MainPageState extends State<MainPage> {
     bool isDesktop = MediaQuery.of(context).size.width > 600;
 
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 106, 102, 102),
+      backgroundColor: const Color.fromARGB(255, 228, 185, 185),
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 162, 162, 157),
+        backgroundColor: Color.fromARGB(255, 211, 179, 217),
         title: Text("Recipes"),
         actions: [
           IconButton(
@@ -64,17 +64,13 @@ class _MainPageState extends State<MainPage> {
                 showSearch(context: context, delegate: CustomSearchDelegate()),
             icon: Icon(Icons.search),
           ),
-          ElevatedButton(
-            onPressed: (() => printRecipes()),
-            child: Text("debug"),
-          ),
         ],
       ),
       body: Row(
         children: [
           if (isDesktop)
             NavigationRail(
-              backgroundColor: Color.fromARGB(255, 162, 162, 157),
+              backgroundColor: Color.fromARGB(255, 211, 179, 217),
               selectedIndex: _selectedIndex,
               onDestinationSelected: changeScreen,
               destinations: const [
@@ -97,7 +93,7 @@ class _MainPageState extends State<MainPage> {
       ),
       bottomNavigationBar: !isDesktop
           ? BottomNavigationBar(
-              backgroundColor: Color.fromARGB(255, 162, 162, 157),
+              backgroundColor: Color.fromARGB(255, 211, 179, 217),
               currentIndex: _selectedIndex,
               onTap: changeScreen,
               items: const [
