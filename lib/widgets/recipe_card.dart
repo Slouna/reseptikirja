@@ -48,9 +48,10 @@ class RecipeCard extends StatelessWidget {
                     favoritesProvider.toggleFavorite(recipe.id);
                   },
                 ),
-                TextButton(
+                ElevatedButton(
                   onPressed: () => Get.toNamed("/recipe/${recipe.id}"),
                   child: const Text("Go to recipe"),
+                  style: ButtonStyle(backgroundColor: WidgetStateProperty.all<Color>(Color.fromARGB(255, 211, 179, 217)) ),
                 ),
               ],
             ),

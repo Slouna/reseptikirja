@@ -66,32 +66,43 @@ class _MainPageState extends State<MainPage> {
           ),
         ],
       ),
-      body: Row(
-        children: [
-          if (isDesktop)
-            NavigationRail(
-              backgroundColor: Color.fromARGB(255, 211, 179, 217),
-              selectedIndex: _selectedIndex,
-              onDestinationSelected: changeScreen,
-              destinations: const [
-                NavigationRailDestination(
-                  icon: Icon(Icons.home),
-                  label: Text("Home"),
-                ),
-                NavigationRailDestination(
-                  icon: Icon(Icons.favorite),
-                  label: Text("Favorites"),
-                ),
-                NavigationRailDestination(
-                  icon: Icon(Icons.add),
-                  label: Text("New"),
+      body: LayoutBuilder(
+      builder: (context, constraints) {
+        return Row(
+              children: [
+                if (isDesktop)
+                  NavigationRail(
+                    backgroundColor: Color.fromARGB(255, 211, 179, 217),
+                    selectedIndex: _selectedIndex,
+                    onDestinationSelected: changeScreen,
+                    destinations: const [
+                      NavigationRailDestination(
+                        icon: Icon(Icons.home),
+                        label: Text("Home"),
+                      ),
+                      NavigationRailDestination(
+                        icon: Icon(Icons.favorite),
+                        label: Text("Favorites"),
+                      ),
+                      NavigationRailDestination(
+                        icon: Icon(Icons.add),
+                        label: Text("New"),
+                      ),
+                    ],
+                  ),
+                Expanded(
+                  child: Center(
+                    child: Container(
+                      constraints: BoxConstraints(maxWidth: 1200),
+                      child: _pages[_selectedIndex]
+                    ),
+                  ),
                 ),
               ],
-            ),
-          Expanded(child: _pages[_selectedIndex]),
-        ],
+              );
+      },
       ),
-      bottomNavigationBar: !isDesktop
+            bottomNavigationBar: !isDesktop
           ? BottomNavigationBar(
               backgroundColor: Color.fromARGB(255, 211, 179, 217),
               currentIndex: _selectedIndex,
@@ -106,6 +117,7 @@ class _MainPageState extends State<MainPage> {
               ],
             )
           : null,
+              
     );
   }
 }
