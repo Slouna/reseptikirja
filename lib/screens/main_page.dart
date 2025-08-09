@@ -2,17 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/instance_manager.dart';
 import 'package:reseptikirja/controllers/recipe_controller.dart';
 import 'package:reseptikirja/main.dart';
+import 'package:reseptikirja/screens/home_screen.dart';
 import 'package:reseptikirja/screens/favourites_screen.dart';
 import 'package:reseptikirja/screens/new_recipe_screen.dart';
 import '../utils/custom_search_delegate.dart';
 
-/* 
-   TODO: make single recipe cite nicer
-   TODO: delete recipes
-   TODO: clean imports
 
-
-*/
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -42,12 +37,6 @@ class _MainPageState extends State<MainPage> {
     ];
   }
 
-  void printRecipes() {
-    for (var i in recipeController.recipes) {
-      print(i.name);
-      print(i.description);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {

@@ -33,15 +33,3 @@ Future<void> main() async {
     ),
   );
 }
-
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(10),
-      child: RecipeListView(favorites: false),
-    );
-  }
-}

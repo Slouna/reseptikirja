@@ -20,5 +20,6 @@ App does not have any loggin system yet, so anyone can edit, create or delete th
         - make a new recipe
     - recipe
         - named route for all the individual recipes, named with recipes id
+        - here you can edit and delete the recipes
     - search
         - Search for the recipes by name
