@@ -8,7 +8,7 @@ import 'package:reseptikirja/utils/utils.dart';
 
 // ignore: must_be_immutable
 class EditRecipePage extends StatefulWidget {
-  EditRecipePage({super.key, required this.recipeId});
+  const EditRecipePage({super.key, required this.recipeId});
   final String recipeId;
 
   @override

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reseptikirja/controllers/recipe_controller.dart';
-import 'package:reseptikirja/models/recipe.dart';
 import 'package:reseptikirja/screens/main_page.dart';
 import 'package:reseptikirja/screens/recipe_list_view.dart';
 import 'package:hive_ce_flutter/hive_flutter.dart';

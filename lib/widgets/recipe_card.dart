@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:reseptikirja/providers/favorites_provider.dart';
 
 class RecipeCard extends StatelessWidget {
-  RecipeCard({super.key, required this.recipe});
+  const RecipeCard({super.key, required this.recipe});
   final Recipe recipe;
 
   String getName() {
@@ -50,8 +50,8 @@ class RecipeCard extends StatelessWidget {
                 ),
                 ElevatedButton(
                   onPressed: () => Get.toNamed("/recipe/${recipe.id}"),
-                  child: const Text("Go to recipe"),
                   style: ButtonStyle(backgroundColor: WidgetStateProperty.all<Color>(Color.fromARGB(255, 211, 179, 217)) ),
+                  child: const Text("Go to recipe"),
                 ),
               ],
             ),
