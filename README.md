@@ -1,6 +1,8 @@
 Recipe application
 ========================== 
 
+link to the website: https://slouna.github.io/reseptikirja-web-app/
+
 An application where you can save your favorite recipes.
 App does not have any loggin system yet, so anyone can edit, create or delete the recipes.
 
